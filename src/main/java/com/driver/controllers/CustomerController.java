@@ -16,6 +16,7 @@ public class CustomerController {
 	CustomerService customerService;
 	@PostMapping("/register")
 	public ResponseEntity<Void> registerCustomer(@RequestBody Customer customer){
+		customerService.register(customer);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -31,9 +32,11 @@ public class CustomerController {
 
 	@DeleteMapping("/complete")
 	public void completeTrip(@RequestParam Integer tripId){
+		customerService.completeTrip(tripId);
 	}
 
 	@DeleteMapping("/cancelTrip")
 	public void cancelTrip(@RequestParam Integer tripId){
+		customerService.completeTrip(tripId);
 	}
 }
