@@ -13,9 +13,9 @@ public class TripBooking {
 
     private String toLocation;
 
-    private int distanceInKms;
+    private int distanceInKm;
 
-    private TripStatus tripStatus;
+    private TripStatus status;
     private int bill;
 
     @ManyToOne
@@ -29,12 +29,12 @@ public class TripBooking {
     public TripBooking() {
     }
 
-    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKms, TripStatus tripStatus, int bill, Driver driver, Customer customer) {
+    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus status, int bill, Driver driver, Customer customer) {
         this.tripBookingId = tripBookingId;
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
-        this.distanceInKms = distanceInKms;
-        this.tripStatus = tripStatus;
+        this.distanceInKm = distanceInKm;
+        this.status = status;
         this.bill = bill;
         this.driver = driver;
         this.customer = customer;
@@ -64,20 +64,20 @@ public class TripBooking {
         this.toLocation = toLocation;
     }
 
-    public int getDistanceInKms() {
-        return distanceInKms;
+    public int getDistanceInKm() {
+        return distanceInKm;
     }
 
-    public void setDistanceInKms(int distanceInKms) {
-        this.distanceInKms = distanceInKms;
+    public void setDistanceInKm(int distanceInKm) {
+        this.distanceInKm = distanceInKm;
     }
 
-    public TripStatus getTripStatus() {
-        return tripStatus;
+    public TripStatus getStatus() {
+        return status;
     }
 
-    public void setTripStatus(TripStatus tripStatus) {
-        this.tripStatus = tripStatus;
+    public void setStatus(TripStatus status) {
+        this.status = status;
     }
 
     public int getBill() {

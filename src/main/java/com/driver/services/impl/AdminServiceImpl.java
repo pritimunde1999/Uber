@@ -44,6 +44,14 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteAdmin(int adminId){
 		// Delete admin without using deleteById function
 
+		List<Admin> adminList = adminRepository1.findAll();
+		for(Admin admin : adminList) {
+			if (admin.getAdminId() == adminId) {
+				adminList.remove(admin);
+				return;
+			}
+
+		}
 
 	}
 
