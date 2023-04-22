@@ -2,6 +2,7 @@ package com.driver.services.impl;
 
 import com.driver.model.*;
 import com.driver.services.CustomerService;
+import org.apache.tomcat.util.buf.C2BConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,15 +52,18 @@ public class CustomerServiceImpl implements CustomerService {
 		//Avoid using SQL query
 		List<Driver> driverList = driverRepository2.findAll();
 		Driver driver = null;
+		Cab cab = null;
 		int min = Integer.MAX_VALUE;
-		try {
+
 			for (Driver driver1 : driverList) {
 				if (driver1.getDriverId() < min && driver1.getCab().getAvailable()) {
 					min = driver1.getDriverId();
 					driver = driver1;
+					cab = driver1.getCab();
 				}
 			}
-		} catch (Exception e) {
+
+		if(cab==null){
 			throw new Exception("No cab available!");
 		}
 		Customer customer = customerRepository2.findById(customerId).get();
@@ -71,7 +75,7 @@ public class CustomerServiceImpl implements CustomerService {
 		tripBooking.setDistanceInKm(distanceInKm);
 		tripBooking.setStatus(TripStatus.CONFIRMED);
 
-		driver.getCab().setAvailable(false);
+		cab.setAvailable(false);
 
 		int perKmRate = driver.getCab().getPerKmRate();
 		int bill = distanceInKm*perKmRate;
@@ -97,7 +101,7 @@ public class CustomerServiceImpl implements CustomerService {
 		tripBooking.setStatus(TripStatus.CANCELED);
 		tripBooking.getDriver().getCab().setAvailable(true);
 		tripBookingRepository2.save(tripBooking);
-		tripBookingRepository2.save(tripBooking);
+
 	}
 
 	@Override
